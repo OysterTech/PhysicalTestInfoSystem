@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-后台修改成绩
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-13
- * @update 2018-11-13
+ * @update 2018-11-16
  */
 	
 require_once '../../include/public.func.php';
@@ -16,9 +16,9 @@ require_once '../../include/public.func.php';
 </head>
 <body>
 
-<center><img src="https://www.xshgzs.com/resource/index/images/logo.png" style="width:50%;"></center>
+<center><img src="https://www.xshgzs.com/resource/index/images/logo.png" style="width:30%;"></center>
 
-<h2 style="text-align:center;">生蚝科技-广州市育才中学<br>学生国家体质测试<br>成绩管理系统</h2>
+<h2 style="text-align:center;">生蚝体测信息管理系统</h2>
 
 <hr>
 
@@ -174,15 +174,15 @@ function edit(name,cnName,score,point,level){
 			<div class="modal-body">
 				<table class="table table-hover table-striped table-bordered" style="border-radius:5px;border-collapse: separate;text-align:center;">
 					<tr>
-						<th>成绩</th>
+						<th style="vertical-align:middle;text-align:center;">成绩</th>
 						<td><input id="score" class="form-control"></td>
 					</tr>
 					<tr>
-						<th>评分</th>
+						<th style="vertical-align:middle;text-align:center;">评分</th>
 						<td><input id="point" class="form-control"></td>
 					</tr>
 					<tr>
-						<th>等级</th>
+						<th style="vertical-align:middle;text-align:center;">等级</th>
 						<td><input id="level" class="form-control" readonly></td>
 					</tr>
 				</table>

@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-按身份证号查成绩
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-08
- * @update 2018-11-13
+ * @update 2018-11-16
  */
 	
 require_once 'include/public.func.php';
@@ -86,7 +86,7 @@ function search(){
 				className=scoreList[0]['class_name'];
 				name=scoreList[0]['name'];
 
-				html="<center><h3>"+className+" "+name+"</h3></center>";
+				html="<center><h4>"+className+" "+name+"</h4></center>";
 
 				// 显示每年的成绩
 				for(i=0;i<totalScore;i++){
@@ -94,7 +94,7 @@ function search(){
 
 					html+='<table class="table table-hover table-striped table-bordered" style="border-radius:5px;border-collapse: separate;text-align:center;">'
 					    +'<tr>'
-					    +'<th colspan="4" style="text-align:center;background-color:#BAF7FD;">'+info['year']+' 年度</th>'
+					    +'<th colspan="4" style="text-align:center;background-color:#BAF7FD;">'+info['year']+' 学年</th>'
 					    +'</tr>'
 					    +'<tr>'
 					    +'<th style="text-align:center;background-color:#BEFFB1;">项目名称</th>'
