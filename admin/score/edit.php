@@ -104,7 +104,7 @@ function search(){
 						point=score[1];
 						level=score[2];
 
-						html+='<tr onclick="edit('+"'"+field+"','"+scoreFieldList[field]+"'"+');">'
+						html+='<tr onclick="edit('+"'"+field+"','"+scoreFieldList[field]+"','"+scoreNum+"','"+point+"','"+level+"'"+');">'
 						    +'<th style="vertical-align:middle;text-align:center;">'+scoreFieldList[field]+'</th>';
 						
 						if(info[field]=="||"){
@@ -134,6 +134,15 @@ function search(){
 		}
 	});
 }
+
+
+function edit(name,cnName,score,point,level){
+	$("#fieldName").html(cnName);
+	$("#score").val(score);
+	$("#point").val(point);
+	$("#level").val(level);
+	$("#editModal").modal("show");
+}
 </script>
 
 <div class="modal fade" id="tipsModal">
@@ -155,7 +164,7 @@ function search(){
 	</div>
 </div>
 
-<div class="modal fade" id="adviceModal">
+<div class="modal fade" id="editModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -163,12 +172,23 @@ function search(){
 				<h3 class="modal-title" id="fieldName"></h3>
 			</div>
 			<div class="modal-body">
-				<font style="font-weight:bold;font-size:20px;">
-					<p id="adviceContent"></p>
-				</font>
+				<table class="table table-hover table-striped table-bordered" style="border-radius:5px;border-collapse: separate;text-align:center;">
+					<tr>
+						<th>成绩</th>
+						<td><input id="score" class="form-control"></td>
+					</tr>
+					<tr>
+						<th>评分</th>
+						<td><input id="point" class="form-control"></td>
+					</tr>
+					<tr>
+						<th>等级</th>
+						<td><input id="level" class="form-control" readonly></td>
+					</tr>
+				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">关闭 &gt;</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">&lt; 关闭</button> <button type="button" class="btn btn-success" data-dismiss="modal" onclick="toEdit();">确认修改 &gt;</button>
 			</div>
 		</div>
 	</div>

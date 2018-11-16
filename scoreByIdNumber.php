@@ -16,11 +16,7 @@ require_once 'include/public.func.php';
 </head>
 <body>
 
-<center><img src="https://www.xshgzs.com/resource/index/images/logo.png" style="width:50%;"></center>
-
-<h2 style="text-align:center;">生蚝科技-广州市育才中学<br>学生国家体质测试<br>成绩管理系统</h2>
-
-<hr>
+<?php include 'include/pageHeader.php'; ?>
 
 <h2 style="text-align: center;">按身份证号查询成绩</h2>
 
@@ -87,7 +83,10 @@ function search(){
 				scoreFieldList=ret.data['scoreFieldList'];
 				totalScore=scoreList.length;
 				totalField=scoreFieldList.length;
-				html="";
+				className=scoreList[0]['class_name'];
+				name=scoreList[0]['name'];
+
+				html="<center><h3>"+className+" "+name+"</h3></center>";
 
 				// 显示每年的成绩
 				for(i=0;i<totalScore;i++){

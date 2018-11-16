@@ -12,13 +12,13 @@
 <link rel="shortcut icon" href="<?=ROOT_PATH;?>favicon.ico">
 
 <?php if(strpos($_SERVER['PHP_SELF'],"admin")===FALSE){ ?>
-<!--script>
+<script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?8eef533602a9d104063a5d632f86bcfd";
+  hm.src = "https://hm.baidu.com/hm.js?fe78ccec304db79c6ded1a7d8dda414a";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
-</script-->
+</script>
 <?php } ?>

@@ -11,38 +11,14 @@ table{
 
 /* 适配手机 */
 @media (min-width: 320px) {
-	.scoreTable {
-		font-size:12px;
-	}
-	.orderTable {
-		font-size:16px;
-	}
-	.gamesListTable td {
-		font-size:15px;
-	}
-	.scheduleTable {
-		font-size:13.5px;
-	}
-	.teamScoreTable{
-		font-size:13px;
+	.logo{
+		width:50%;
 	}
 }
 
 /* 适配大屏设备 */
 @media (min-width: 992px) {
-	.scoreTable {
-		font-size:14px;
-	}
-	.gamesListTable td {
-		font-size:17px;
-	}
-	.orderTable {
-		font-size:16px;
-	}
-	.scheduleTable {
-		font-size:16px;
-	}
-	.teamScoreTable{
-		font-size:16px;
+	.logo{
+		width:25%;
 	}
 }
