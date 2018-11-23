@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-后台修改成绩
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-13
- * @update 2018-11-16
+ * @update 2018-11-17
  */
 	
 require_once '../../include/public.func.php';
@@ -16,11 +16,7 @@ require_once '../../include/public.func.php';
 </head>
 <body>
 
-<center><img src="https://www.xshgzs.com/resource/index/images/logo.png" style="width:30%;"></center>
-
-<h2 style="text-align:center;">生蚝体测信息管理系统</h2>
-
-<hr>
+<?php include '../../include/pageHeader.php'; ?>
 
 <h2 style="text-align: center;">成 绩 修 改</h2>
 
@@ -37,7 +33,7 @@ require_once '../../include/public.func.php';
 
 <!-- 提交按钮 -->
 <center>
-	<a class="btn btn-primary" style="width:48%" href="<?=ROOT_PATH;?>">&lt; 返 回</a> <button class="btn btn-success" style="width:48%" onclick="search();">立 即 查 询 &gt;</button>
+	<a class="btn btn-primary" style="width:48%" href="<?=ROOT_PATH;?>admin/score.php">&lt; 返 回</a> <button class="btn btn-success" style="width:48%" onclick="search();">立 即 查 询 &gt;</button>
 </center>
 <!-- ./提交按钮 -->
 
@@ -49,6 +45,7 @@ require_once '../../include/public.func.php';
 
 <script>
 var tableStyle="border-radius:5px;border-collapse: separate;text-align:center;";
+var idNumber="";
 
 function search(){
 	lockScreen();
@@ -137,11 +134,65 @@ function search(){
 
 
 function edit(name,cnName,score,point,level){
+	$("#editFieldName").val(name);
 	$("#fieldName").html(cnName);
 	$("#score").val(score);
 	$("#point").val(point);
 	$("#level").val(level);
 	$("#editModal").modal("show");
+}
+
+
+function toEdit(){
+	lockScreen();
+	name=$("#editFieldName").val();
+	score=$("#score").val();
+	point=$("#point").val();
+	level=$("#level").val();
+	
+	if(score=="" || point==""){
+		unlockScreen();
+		showTipsModal("请完整输入所有信息！");
+		return false;
+	}
+	
+	
+	$.ajax({
+		url:"toEdit.php",
+		type:"post",
+		data:{"fieldName":name,"idNumber":idNumber,"score":score,"point":point,"level":level},
+		dataType:"json",
+		error:function(e){
+			unlockScreen();
+			console.log(JSON.stringify(e));
+			showTipsModal("服务器错误！<br>请将错误码["+e.readyState+"."+e.status+"]至技术支持");
+			return false;
+		},
+		success:function(ret){
+			unlockScreen();
+			
+			if(ret.code==200){
+				alert("修改成功！\n\n如需立即查看修改结果请重新点击查询！");
+				return true;
+			}else{
+				console.log(JSON.stringify(ret));
+				showTipsModal("系统错误！<br>请将错误码["+ret.code+"]至技术支持");
+				return false;
+			}
+		}
+	});
+}
+
+
+function setLevel(point){
+	point=parseFloat(point);
+	
+	if(point>0 && point<60) level="不及格";
+	else if(point>=60 && point<75) level="及格";
+	else if(point>=75 && point<85) level="良好";
+	else if(point>=85) level="优秀";
+	
+	$("#level").val(level);
 }
 </script>
 
@@ -172,6 +223,7 @@ function edit(name,cnName,score,point,level){
 				<h3 class="modal-title" id="fieldName"></h3>
 			</div>
 			<div class="modal-body">
+				<input type="hidden" id="editFieldName">
 				<table class="table table-hover table-striped table-bordered" style="border-radius:5px;border-collapse: separate;text-align:center;">
 					<tr>
 						<th style="vertical-align:middle;text-align:center;">成绩</th>
@@ -179,11 +231,11 @@ function edit(name,cnName,score,point,level){
 					</tr>
 					<tr>
 						<th style="vertical-align:middle;text-align:center;">评分</th>
-						<td><input id="point" class="form-control"></td>
+						<td><input id="point" class="form-control" onkeyup="if(event.keyCode==13)setLevel(this.value);" onblur="setLevel(this.value);"></td>
 					</tr>
 					<tr>
 						<th style="vertical-align:middle;text-align:center;">等级</th>
-						<td><input id="level" class="form-control" readonly></td>
+						<td><input id="level" class="form-control"></td>
 					</tr>
 				</table>
 			</div>

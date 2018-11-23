@@ -8,6 +8,7 @@
 		
 		<br>
 		
+		<a style="color:#64DD17" onclick='$("#adminWxModal").modal("show");'><i class="fa fa-weixin fa-lg" aria-hidden="true"></i></a>
 		<a style="color:#FF7043" onclick='launchQQ()'><i class="fa fa-qq fa-lg" aria-hidden="true"></i></a>
 		<a style="color:#29B6F6" href="mailto:master@xshgzs.com"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a>
 		<a style="color:#AB47BC" href="https://github.com/OysterTech" target="_blank"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a>
@@ -44,3 +45,24 @@ function launchQQ(){
 	}
 }
 </script>
+
+<div class="modal fade" id="adminWxModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h3 class="modal-title">微信联系技术支持</h3>
+			</div>
+			<div class="modal-body">
+				<img src="<?=IMG_PATH.'wxCode.png';?>" style="width:100%;">
+				<font color="blue" style="font-weight:bold;font-size:22px;text-align:left;">
+					扫码添加技术支持个人微信，或搜索微信号“zjhit0409”<br>
+					★ 添加时，请备注：<font color="green">PHY+班级姓名</font>。
+				</font>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">关闭 &gt;</button>
+			</div>
+		</div>
+	</div>
+</div>

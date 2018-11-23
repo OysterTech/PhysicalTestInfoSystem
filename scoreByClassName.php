@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-按班+名查成绩
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-10
- * @update 2018-11-16
+ * @update 2018-11-22
  */
 	
 require_once 'include/public.func.php';
@@ -74,14 +74,14 @@ require_once 'include/public.func.php';
 
 <!-- 提交按钮 -->
 <center>
-	<a class="btn btn-primary" style="width:48%" href="<?=ROOT_PATH;?>">&lt; 返 回</a> <button class="btn btn-success" style="width:48%" onclick="search();">立 即 查 询 &gt;</button>
+	<a class="btn btn-primary" style="width:48%" href="<?=ROOT_PATH;?>">&lt; 返 回</a> <button class="btn btn-success" style="width:48%" onclick="inputPassword();">立 即 查 询 &gt;</button>
 </center>
 <!-- ./提交按钮 -->
 
 <hr>
 
 <div style="width:98%;text-align:center;margin: 0 auto;">
-	<div class="alert alert-info">
+	<div class="alert alert-danger">
 		<i class="fa fa-lightbulb-o" aria-hidden="true"></i> 点击项目名称可查看该项目的练习建议
 	</div>
 </div>
@@ -93,13 +93,18 @@ require_once 'include/public.func.php';
 <script src="<?=JS_PATH;?>advice.js"></script>
 <script>
 var tableStyle="border-radius:5px;border-collapse: separate;text-align:center;";
+var token="";
 
-function search(){
+function inputPassword(){
 	lockScreen();
 	name=$("#name").val();
 	grade=$("#grade").val();
 	classNum=$("#classNum").val();
+	className=grade+classNum+"班";
 	
+	$("#scoreShow").html("");
+	$("#password").val("");
+
 	if(name=="" || name.length<2){
 		unlockScreen();
 		showTipsModal("请正确输入姓名！");
@@ -114,15 +119,10 @@ function search(){
 		unlockScreen();
 		showTipsModal("请选择班别！");
 		return false;
-	}
-	
-	/*type=grade.substr(0,1);
-	grade=grade.substr(1);
-	enrollYear=getEnrollYearByGrade(grade);*/
-	className=grade+classNum+"班";
+	}	
 	
 	$.ajax({
-		url:"getScore.php",
+		url:"getScoreToken.php",
 		data:{"orderBy":"className","name":name,"className":className},
 		dataType:"json",
 		error:function(e){
@@ -133,6 +133,50 @@ function search(){
 		},
 		success:function(ret){
 			unlockScreen();
+		
+			if(ret.code==200){
+				token=ret.data['token'];
+				setCookie("phyToken",token);
+				$("#inputPwdModal").modal("show");
+				return true;
+			}else if(ret.code==1){
+				showTipsModal("学生不存在 或 成绩暂未录入！");
+				return false;
+			}else if(ret.code==0 || ret.code==2){
+				showTipsModal("参数缺失！<br>请联系管理员！");
+				return false;
+			}else{
+				showTipsModal("系统错误！<br>请将错误码["+ret.code+"]至技术支持");
+				return false;
+			}
+		}
+	});
+}
+
+function search(){
+	lockScreen();	
+	password=$("#password").val();
+	
+	if(password=="" || password.length<6){
+		unlockScreen();
+		$("#inputPwdModal").modal("hide");
+		showTipsModal("请正确输入查询密码！");
+		return false;
+	}
+	
+	$.ajax({
+		url:"getScore.php",
+		data:{"token":token,"password":password},
+		dataType:"json",
+		error:function(e){
+			unlockScreen();
+			console.log(JSON.stringify(e));
+			showTipsModal("服务器错误！<br>请将错误码["+e.readyState+"."+e.status+"]至技术支持");
+			return false;
+		},
+		success:function(ret){
+			unlockScreen();
+			$("#inputPwdModal").modal("hide");
 			$("#scoreShow").html("");
 
 			if(ret.code==200){
@@ -187,6 +231,9 @@ function search(){
 
 				$("#scoreShow").html(html);
 				return true;
+			}else if(ret.code==403){
+				showTipsModal("查询密码有误！");
+				return false;
 			}else if(ret.code==1){
 				showTipsModal("无此学生或成绩暂未录入！<br>请耐心等待，谢谢配合！");
 				return false;
@@ -198,25 +245,6 @@ function search(){
 	});
 }
 </script>
-
-<div class="modal fade" id="tipsModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
-				<h3 class="modal-title" id="ModalTitle">温馨提示</h3>
-			</div>
-			<div class="modal-body">
-				<font color="red" style="font-weight:bold;font-size:24px;text-align:center;">
-					<p id="tips"></p>
-				</font>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">关闭 &gt;</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 <div class="modal fade" id="adviceModal">
 	<div class="modal-dialog">
@@ -236,6 +264,10 @@ function search(){
 		</div>
 	</div>
 </div>
+
+<?php include 'include/password.php'; ?>
+
+<?php include 'include/tipsModal.php'; ?>
 
 </body>
 </html>
