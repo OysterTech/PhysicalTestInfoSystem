@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-按证件号查成绩
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-08
- * @update 2018-11-20
+ * @update 2018-12-14
  */
 	
 require_once 'include/public.func.php';
@@ -18,14 +18,14 @@ require_once 'include/public.func.php';
 
 <?php include 'include/pageHeader.php'; ?>
 
-<h2 style="text-align:center;">按身份证号查询成绩</h2>
+<h3 style="text-align:center;">按身份证号后8位查询成绩</h3>
 
 <hr>
 
 <!-- 身份证号输入框 -->
 <div class="input-group">
 	<span class="input-group-addon">身份证号</span>
-	<input class="form-control" id="idNumber" type="number" oninput='if(this.value.length>18){alert("请正确输入身份证号！");}' onkeyup='if(event.keyCode==13)search();' autocomplete="off">
+	<input class="form-control" id="idNumber" type="number" oninput='if(this.value.length>18){alert("请正确输入身份证号！");}' onkeyup='if(event.keyCode==13)inputPassword();' autocomplete="off">
 </div>
 <!-- ./身份证号输入框 -->
 
@@ -62,9 +62,9 @@ function inputPassword(){
 	$("#scoreShow").html("");
 	$("#password").val("");
 	
-	if(idNumber=="" || idNumber.length!=18){
+	if(idNumber=="" || idNumber.length!=8){
 		unlockScreen();
-		showTipsModal("请正确输入身份证号！");
+		showTipsModal("请正确输入身份证号后8位！");
 		return false;
 	}
 	

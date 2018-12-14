@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-按班+名查成绩
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-10
- * @update 2018-11-22
+ * @update 2018-12-14
  */
 	
 require_once 'include/public.func.php';
@@ -22,13 +22,13 @@ require_once 'include/public.func.php';
 
 <hr>
 
-<div style="width:98%;text-align:center;margin: 0 auto;">
+<!--div style="width:98%;text-align:center;margin: 0 auto;">
 	<div class="alert alert-warning">
 		<i class="fa fa-info-circle" aria-hidden="true"></i> 请按照<b style="color:green;">2017年9月时的年级、班级</b>点选！！<br>如：现在是高二，则需选择高一<br>（若有分班请按之前的班级选择）
 	</div>
 </div>
 
-<hr>
+<hr-->
 
 <!-- 姓名输入框 -->
 <div class="input-group">

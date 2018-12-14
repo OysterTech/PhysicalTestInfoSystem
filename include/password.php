@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-密码处理
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-21
- * @update 2018-11-22
+ * @update 2018-12-14
  */
 ?>
 
@@ -17,17 +17,16 @@
 			<div class="modal-body">
 				<div class="alert alert-success">
 					<center>
-						初始密码为<b style="color:#448AFF;">学生身份证号后6位</b><br>
 						<b style="color:red;">请及时修改初始密码！</b><br>
-						<p style="line-height:0.15px;">&nbsp;</p>
+						<p style="line-height:0.1px;">&nbsp;</p>
 						<b>忘记密码请联系技术支持/学校体育科</b><br>
-						<p style="line-height:0.15px;">&nbsp;</p>
+						<p style="line-height:0.1px;">&nbsp;</p>
 						如需修改请<a style="font-weight:bold;color:#673AB7;" onclick='$("#changePwdModal").modal("show");'>点击此处</a>
 					</center>
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
-					<input id="password" type="password" class="form-control" placeholder="请输入查询密码">
+					<input id="password" type="password" class="form-control" placeholder="请输入查询密码" onkeyup='if(event.keyCode==13)search();'>
 				</div>
 			</div>
 			<div class="modal-footer">

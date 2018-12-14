@@ -25,7 +25,7 @@ require_once '../../include/public.func.php';
 <!-- 身份证号输入框 -->
 <div class="input-group">
 	<span class="input-group-addon">身份证号</span>
-	<input class="form-control" id="idNumber" oninput='if(this.value.length>18){alert("请正确输入身份证号！");}' onkeyup='if(event.keyCode==13)search();'>
+	<input class="form-control" id="idNumber" oninput='if(this.value.length>8){alert("请正确输入身份证号！");}' onkeyup='if(event.keyCode==13)search();'>
 </div>
 <!-- ./身份证号输入框 -->
 

@@ -74,8 +74,8 @@ if(isset($_POST) && $_POST){
 		$allroundPoint=$objPHPExcel->getActiveSheet()->getCell("AD".$i)->getValue();
 	}
 
-	$studentQuery=PDOQuery($dbcon,$studentSql);
-	$scoreQuery=PDOQuery($dbcon,$scoreSql);
+//	$studentQuery=PDOQuery($dbcon,$studentSql);
+//	$scoreQuery=PDOQuery($dbcon,$scoreSql);
 
 	if(($HighestRow-1)==$scoreQuery[1]){
 		$ret=returnAjaxData(200,"success");
