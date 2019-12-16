@@ -25,7 +25,8 @@ $scoreSql.="AND a.id=? ORDER BY b.year DESC";
 $queryData=array($stuId);
 
 // 查询成绩
-$scoreQuery=PDOQuery($dbcon,$scoreSql,$queryData);
+$scoreQuery=PDOQuery($dbcon,$scoreSql,$queryData,[PDO::PARAM_INT]);
+$count=PDOQuery($dbcon,"UPDATE student SET count=count+1 WHERE id=?",[$stuId],[PDO::PARAM_INT]);
 if($scoreQuery[1]>=1){
 	die(returnAjaxData(200,"success",['scoreFieldList'=>$scoreFieldList,'scoreList'=>$scoreQuery[0]]));
 }else{

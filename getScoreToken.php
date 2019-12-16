@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-获取查成绩Token
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-19
- * @update 2018-12-10
+ * @update 2018-12-15
  */
 
 require_once 'include/public.func.php';
@@ -17,17 +17,19 @@ if($orderBy=="idNumber"){
 	$idNumber=isset($_GET['idNumber'])&&$_GET['idNumber']!=""?$_GET['idNumber']:die(returnAjaxData(0,"lackParam"));
 	$studentSql.="AND id_number=? ";
 	$queryData=array($idNumber);
+	$studentQuery=PDOQuery($dbcon,$studentSql,$queryData,[PDO::PARAM_INT]);
 }elseif($orderBy=="className"){
 	$name=isset($_GET['name'])&&$_GET['name']!=""?$_GET['name']:die(returnAjaxData(0,"lackParam"));
 	$className=isset($_GET['className'])&&$_GET['className']!=""?$_GET['className']:die(returnAjaxData(0,"lackParam"));
 	$studentSql.="AND name=? AND class_name=?";
 	$queryData=array($name,$className);
+	$studentQuery=PDOQuery($dbcon,$studentSql,$queryData,[PDO::PARAM_STR,PDO::PARAM_STR]);
 }else{
 	die(returnAjaxData(2,"invaildParam"));
 }
 
 // 查询学生
-$studentQuery=PDOQuery($dbcon,$studentSql,$queryData);
+
 if($studentQuery[1]==1){
 	$stuId=$studentQuery[0][0]['id'];
 	$password=$studentQuery[0][0]['password'];

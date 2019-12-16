@@ -3,7 +3,7 @@
  * @name 生蚝体测信息管理系统-Web-按班+名查成绩
  * @author Jerry Cheung <master@xshgzs.com>
  * @create 2018-11-10
- * @update 2018-12-14
+ * @update 2019-12-16
  */
 	
 require_once 'include/public.func.php';
@@ -11,7 +11,7 @@ require_once 'include/public.func.php';
 
 <html>
 <head>
-	<title>生蚝体测信息管理系统 / 生蚝科技</title>
+	<title>生蚝科技-体测信息管理系统</title>
 	<?php include 'include/header.php'; ?>
 </head>
 <body>
@@ -39,17 +39,22 @@ require_once 'include/public.func.php';
 
 <br>
 
+<div class="col-xs-12">
+	<select class="form-control" id="grade" onchange='$("#enrollmentYear").focus();'>
+		<option selected disabled>::: 请选择学段 :::</option>
+		<option disabled>-------------- 西校区 --------------</option>
+		<option value="高" selected>高中</option>
+		<option disabled>-------------- 东校区 --------------</option>
+		<option value="初">初中</option>
+	</select>
+</div>
+
 <div class="col-xs-6">
-	<select class="form-control" id="grade" onchange='$("#classNum").focus();'>
-		<option selected disabled>::: 请选择年级 :::</option>
-		<option disabled>-------------- 初中 --------------</option>
-		<option value="初一">1. 初一</option>
-		<option value="初二">2. 初二</option>
-		<option value="初三">3. 初三</option>
-		<option disabled>-------------- 高中 --------------</option>
-		<option value="高一">1. 高一</option>
-		<option value="高二">2. 高二</option>
-		<option value="高三">3. 高三</option>
+	<select class="form-control" id="enrollmentYear" onchange='$("#classNum").focus();'>
+		<option selected disabled>::: 请选择入学年份 :::</option>
+		<?php for($i=2016;$i<=date('Y');$i++){ ?>
+			<option value="<?=$i;?>"><?php if($i==date('Y')) echo '★ '; ?><?=$i;?> 年</option>
+		<?php } ?>	
 	</select>
 </div>
 <div class="col-xs-6">
@@ -99,8 +104,9 @@ function inputPassword(){
 	lockScreen();
 	name=$("#name").val();
 	grade=$("#grade").val();
+	enrollmentYear=$("#enrollmentYear").val();
 	classNum=$("#classNum").val();
-	className=grade+classNum+"班";
+	className=grade+enrollmentYear+"级"+classNum+"班";
 	
 	$("#scoreShow").html("");
 	$("#password").val("");
@@ -112,7 +118,12 @@ function inputPassword(){
 	}
 	if(grade=="" || grade==null){
 		unlockScreen();
-		showTipsModal("请选择年级！");
+		showTipsModal("请选择学段！");
+		return false;
+	}
+	if(enrollmentYear=="" || enrollmentYear==null){
+		unlockScreen();
+		showTipsModal("请选择入学年份！");
 		return false;
 	}
 	if(classNum=="" || classNum==null){

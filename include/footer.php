@@ -1,18 +1,15 @@
 <hr>
 <center>	
 	<!-- 页脚版权 -->
-	<p style="font-weight:bold;font-size:20px;line-height:26px;">
-	
+	<p style="font-weight:bold;font-size:18px;">
 		育才中学体育科 保留数据解释权<br>
-		&copy; <a href="https://www.xshgzs.com?from=phyTest" target="_blank" style="font-size:21px;">生蚝科技</a> 技术支持
-		
-		<br>
+		&copy;<a href="https://www.xshgzs.com/?from=phyTest" target="_blank">生蚝科技</a><font style="font-size:20px;">(育才高三8 张镜濠)</font> 技术支持<br>
 		
 		<a style="color:#64DD17" onclick='$("#adminWxModal").modal("show");'><i class="fa fa-weixin fa-lg" aria-hidden="true"></i></a>
 		<a style="color:#FF7043" onclick='launchQQ()'><i class="fa fa-qq fa-lg" aria-hidden="true"></i></a>
 		<a style="color:#29B6F6" href="mailto:master@xshgzs.com"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a>
 		<a style="color:#AB47BC" href="https://github.com/OysterTech" target="_blank"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a>
-		<a href="http://www.miitbeian.gov.cn/" target="_blank" style="color:black;">粤ICP备18045107号-2</a><br>
+		<a href="http://www.miitbeian.gov.cn/" target="_blank" style="color:black;">粤ICP备19018320号-1</a><br>
 
 	</p>
 	<!-- ./页脚版权 -->

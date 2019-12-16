@@ -11,21 +11,29 @@ require_once 'include/public.func.php';
 
 <html>
 <head>
-	<title>生蚝体测信息管理系统 / 生蚝科技</title>
+	<title>生蚝科技-体测信息管理系统</title>
 	<?php include 'include/header.php'; ?>
 </head>
 <body>
 
 <?php include 'include/pageHeader.php'; ?>
 
-<h3 style="text-align:center;">按身份证号后8位查询成绩</h3>
+<h3 style="text-align:center;">按身份证号后<font style="font-weight:bold;font-size:31px;">8</font>位查询成绩</h3>
 
 <hr>
+
+<!--div style="width:98%;text-align:center;margin: 0 auto;">
+	<div class="alert alert-danger">
+		<i class="fa fa-info-circle" aria-hidden="true"></i> 应学校要求，即日起身份证尾数查询由<b>8</b>位改为<b>6</b>位，谢谢配合！
+	</div>
+</div>
+
+<hr-->
 
 <!-- 身份证号输入框 -->
 <div class="input-group">
 	<span class="input-group-addon">身份证号</span>
-	<input class="form-control" id="idNumber" type="number" oninput='if(this.value.length>18){alert("请正确输入身份证号！");}' onkeyup='if(event.keyCode==13)inputPassword();' autocomplete="off">
+	<input class="form-control" id="idNumber" oninput='if(this.value.length>18){alert("请正确输入身份证号！");}' onkeyup='if(event.keyCode==13)inputPassword();' autocomplete="off">
 </div>
 <!-- ./身份证号输入框 -->
 
